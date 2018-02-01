@@ -13,7 +13,7 @@ from django.contrib.auth.models import BaseUserManager
 
 # Create your models here.
 class UserProfileManager(BaseUserManager):
-    """django will use this to understand our user model"""
+    """django will use this to understand our user model (altered model)"""
 
     def create_user(self, email, name, password=None):
         """Create and validate a new user profile object"""
@@ -68,6 +68,10 @@ class UserProfile(AbstractBaseUser,PermissionsMixin):
         """ To get a user's short name"""
         return self.name
 
+    def  get_short_name(self):
+        """ This method is called after login so here we have to define it"""
+        return self.name
+        
     def _str_(self):
         """convert object to string"""
         return self.name
