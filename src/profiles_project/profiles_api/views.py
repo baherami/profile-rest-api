@@ -9,6 +9,9 @@ from . import serializers
 #import HTTP status
 from rest_framework import status
 
+# adding viewset
+from rest_framework import viewsets
+
 # Create your views here.
 
 class HelloApiView(APIView):
@@ -25,7 +28,8 @@ class HelloApiView(APIView):
             'get, post, patch, put, delete',
         ]
         # return a response object via a dictionary
-        return Response({'message':'Testing APIView', 'apiview_example':apiview_example})
+        return Response(
+        {'message':'Testing APIView', 'apiview_example':apiview_example})
 
     def post(self, request):
         """ Create a hello response with name"""
@@ -57,4 +61,15 @@ class HelloApiView(APIView):
         """delete an object, logics are not implemented yet"""
 
         return Response({'method':'delete'})
-                
+
+class HelloViewSet(viewsets.ViewSet):
+    """ Test API ViewSets"""
+
+    def list(self, request):
+        """ return a hello message"""
+        viewset_example = [
+            'Use actions',
+            'list, create, retrieve, update, partial_update',
+        ]
+        # return a response object via a dictionary
+        return Response({'message':'Testing ViewSet', 'viewset_example':viewset_example})
