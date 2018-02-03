@@ -6,6 +6,7 @@ from rest_framework.response import Response
 
 #import for serializers
 from . import serializers
+from . import models
 #import HTTP status
 from rest_framework import status
 
@@ -108,3 +109,8 @@ class HelloViewSet(viewsets.ViewSet):
         """Handles deleting an object."""
 
         return Response({'http_method': 'PATCH'})
+
+class UserProfileViewSet(viewsets.ModelViewSet):
+    """ Handles CRUD for profiles"""
+    serializer_class = serializers.UserProfileSerializer
+    queryset = models.UserProfile.objects.all()
