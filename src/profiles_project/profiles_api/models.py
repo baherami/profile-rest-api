@@ -71,7 +71,17 @@ class UserProfile(AbstractBaseUser,PermissionsMixin):
     def  get_short_name(self):
         """ This method is called after login so here we have to define it"""
         return self.name
-        
+
     def _str_(self):
         """convert object to string"""
         return self.name
+class ProfileFeedItem(models.Model):
+    """Profile status update"""
+    #creating related model's fields."""
+    user_profile = models.ForeignKey('UserProfile',on_delete=models.CASCADE)
+    status_text = models.CharField(max_length=255)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    def _str_(self):
+        """convert object to string"""
+        return self.status_text
