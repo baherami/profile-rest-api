@@ -7,9 +7,13 @@ from rest_framework.response import Response
 #import for serializers
 from . import serializers
 from . import models
+
+from . import permissions
+
 #import HTTP status
 from rest_framework import status
 
+from rest_framework.authentication import TokenAuthentication
 # adding viewset
 from rest_framework import viewsets
 
@@ -114,3 +118,7 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     """ Handles CRUD for profiles"""
     serializer_class = serializers.UserProfileSerializer
     queryset = models.UserProfile.objects.all()
+    # adding token Authentication tuple
+    authentication_classes= (TokenAuthentication,)
+    # adding permissions
+    permission_classes=(permissions.UpdateOwnProfile,)
